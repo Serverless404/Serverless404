@@ -25,8 +25,8 @@ class ReservationApplyActivity: AppCompatActivity() {
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
         }
 
-        popBottomBtn.setOnClickListener {
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
-        }
+//        popBottomBtn.setOnClickListener {
+//            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+//        }
     }
 }
