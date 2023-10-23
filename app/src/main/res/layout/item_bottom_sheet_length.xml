@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="36dp"
+    android:layout_height="680dp"
+    android:background="@drawable/item_bottom_sheet_shape"
+    android:id="@+id/bottom_sheet_length"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="회의 길이"
+        android:textAlignment="center"
+        android:layout_marginTop="100dp"
+        android:textSize="24sp"
+        android:textColor="@color/black">
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="90분"
+        android:textAlignment="center"
+        android:textSize="64sp"
+        android:textColor="@color/black">
+    </TextView>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:scaleY="0.2"
+        android:progress="70"
+        android:progressTint="#0077ff"
+        android:progressDrawable="@drawable/progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        >
+    </ProgressBar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="한국 직장인들의 회의 길이는 어떨까요?"
+        android:textAlignment="center"
+        android:layout_marginTop="40dp"
+        android:textSize="19sp"
+        android:textColor="#91919F">
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="58%"
+        android:textAlignment="viewEnd"
+        android:layout_marginTop="4dp"
+        android:paddingRight="40dp"
+        android:textSize="19sp"
+        android:textColor="#838C8A">
+    </TextView>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:scaleY="0.2"
+        android:progress="58"
+        android:progressTint="#FCAC12"
+        android:progressDrawable="@drawable/progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        >
+    </ProgressBar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="32%"
+        android:textAlignment="viewEnd"
+        android:layout_marginTop="4dp"
+        android:paddingRight="40dp"
+        android:textSize="19sp"
+        android:textColor="#838C8A">
+    </TextView>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:scaleY="0.2"
+        android:progress="32"
+        android:progressTint="#7F3DFF"
+        android:progressDrawable="@drawable/progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        >
+    </ProgressBar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="8%"
+        android:textAlignment="viewEnd"
+        android:layout_marginTop="4dp"
+        android:paddingRight="40dp"
+        android:textSize="19sp"
+        android:textColor="#91919F">
+    </TextView>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:scaleY="0.2"
+        android:progress="8"
+        android:progressTint="#FD3C4A"
+        android:progressDrawable="@drawable/progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        >
+    </ProgressBar>
+
+
+</LinearLayout>
