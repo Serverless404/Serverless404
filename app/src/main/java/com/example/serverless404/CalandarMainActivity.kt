@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -67,6 +68,7 @@ class CalandarMainActivity : AppCompatActivity() {
         var totalScheduleArrayList : ArrayList<Schedule> = arrayListOf()
         val dateText : TextView = findViewById(R.id.scheduleDateTextView)
         val refreshIcon = findViewById<ImageView>(R.id.refreshImage)
+        val addScheduleButton = findViewById<Button>(R.id.addScheduleButton)
 
         //달력 뷰
         val calendar: MaterialCalendarView = findViewById(R.id.calendarView)
@@ -83,6 +85,13 @@ class CalandarMainActivity : AppCompatActivity() {
             overridePendingTransition(0,0)
             startActivity(intent)
             overridePendingTransition(0,0)
+        }
+
+        //일정 추가 버튼 설정
+        addScheduleButton.setOnClickListener {
+            val intent = Intent(this@CalandarMainActivity,ReservationApplyActivity::class.java)
+            intent.putExtra("owner",owner)
+            startActivity(intent)
         }
         
         //레트로핏 HTTP 데이터 요청
