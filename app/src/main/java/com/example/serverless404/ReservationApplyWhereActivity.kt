@@ -8,22 +8,21 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-class ReservationApplyActivity: AppCompatActivity() {
-
+class ReservationApplyWhereActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activty_reservation_apply)
+        setContentView(R.layout.activity_reservation_apply_where)
 
         val bottomSheetBehavior: BottomSheetBehavior<*>?
-        val popBottomBtn:TextView = findViewById(R.id.popBottomBtn)
+        val popBottomBtn: TextView = findViewById(R.id.popBottomBtn)
         val backBtn: Button = findViewById(R.id.backBtn)
         val nextBtn: Button = findViewById(R.id.nextBtn)
-        val bottomSheetWho: View = findViewById(R.id.bottom_sheet_who)
+        val bottomSheetWhere: View = findViewById(R.id.bottom_sheet_where)
 
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetWho)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetWhere)
 
         fun moveToAnotherPage(){
-            val intent = Intent(this, ReservationApplyWhereActivity::class.java)
+            val intent = Intent(this, ReservationApplyLengthActivity::class.java)
             startActivity(intent)
         }
 
@@ -34,9 +33,5 @@ class ReservationApplyActivity: AppCompatActivity() {
         nextBtn.setOnClickListener {
             moveToAnotherPage()
         }
-
-//        popBottomBtn.setOnClickListener {
-//            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
-//        }
     }
 }
