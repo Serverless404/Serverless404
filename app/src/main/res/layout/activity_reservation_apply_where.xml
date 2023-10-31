@@ -38,6 +38,7 @@
                 android:layout_height="48dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="일정 추가"
+                android:fontFamily="@font/samsungfont_bold"
                 android:textColor="@color/white"
                 android:textSize="42px"></TextView>
 

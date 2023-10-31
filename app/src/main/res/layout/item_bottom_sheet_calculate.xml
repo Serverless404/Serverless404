@@ -24,22 +24,22 @@
             android:scaleType="centerCrop"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/gradient_back">
+            app:lottie_rawRes="@raw/multi_shape_loader">
 
         </com.airbnb.lottie.LottieAnimationView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:layout_marginTop="200dp"
-            android:text="가능한 시간"
+            android:text="찾는중.."
             android:fontFamily="@font/samsungfont_bold"
             android:textAlignment="center"
             android:textColor="#91919f"
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/random_time_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

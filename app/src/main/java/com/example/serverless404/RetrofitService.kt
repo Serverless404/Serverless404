@@ -4,8 +4,6 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Headers
-import retrofit2.http.Query
 
 interface RetrofitService {
 
@@ -14,4 +12,7 @@ interface RetrofitService {
 
     @GET("getScheduleListAPI")
     fun getScheduleListAPI(@Header("input_json") req: String) : Call<List<ScheduleDto>>
+
+    @GET("findScheduleAPI")
+    fun findScheduleAPI(@Header("input_json") req: String) : Call<List<AvailableTimeDto>>
 }
