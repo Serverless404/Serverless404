@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    app:behavior_hideable="true"
-    app:behavior_peekHeight="36dp"
-    android:layout_height="680dp"
+    app:behavior_peekHeight="660dp"
+    android:layout_height="700dp"
+    app:behavior_draggable="false"
     android:background="@drawable/item_bottom_sheet_shape"
     android:id="@+id/bottom_sheet_length"
     app:layout_behavior="@string/bottom_sheet_behavior"
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="회의 길이"
         android:textAlignment="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:textSize="24sp"
         android:textColor="@color/black">
     </TextView>
@@ -24,24 +24,31 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/minute_text"
         android:text="90분"
         android:textAlignment="center"
         android:textSize="64sp"
         android:textColor="@color/black">
     </TextView>
 
-    <ProgressBar
-        android:layout_width="match_parent"
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/time_slider"
+        android:layout_width="350dp"
+        app:thumbColor="@color/white"
+        app:thumbRadius="10dp"
+        app:trackHeight="15dp"
+        app:trackColorInactive="#f1f1f1"
+        app:haloColor="@color/skyblue"
+        app:haloRadius="16dp"
+        app:tickVisible="false"
+        android:layout_gravity="center"
         android:layout_height="40dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:scaleY="0.2"
-        android:progress="70"
-        android:progressTint="#0077ff"
-        android:progressDrawable="@drawable/progress"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        >
-    </ProgressBar>
+        android:stepSize="30.0"
+        android:theme="@style/MyCustomTheme"
+        android:valueFrom="0.0"
+        android:value="60"
+        android:valueTo="180.0" />
 
     <TextView
         android:layout_width="match_parent"
@@ -125,5 +132,31 @@
         >
     </ProgressBar>
 
-
+    <LinearLayout
+        android:id="@+id/next_step_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:paddingVertical="8dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <Button
+            android:layout_width="343dp"
+            android:layout_height="56dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/item_btn_16_corners"
+            android:textColor="@color/white"
+            android:fontFamily="@font/samsungfont_bold"
+            android:id="@+id/length_finish_btn"
+            android:text="회의시간 설정 완료"
+            android:textSize="22sp"
+            >
+        </Button>
+    </LinearLayout>
 </LinearLayout>

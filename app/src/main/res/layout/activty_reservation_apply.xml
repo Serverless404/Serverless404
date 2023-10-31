@@ -5,18 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#003cdc"
+    android:background="@color/blue"
+    app:layout_constraintVertical_weight="6"
     tools:context=".ReservationApplyActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_reservation_apply_top"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:layout_height="0dp"
         android:background="#003cdc"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/coordi_layout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="0.7">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,12 +34,13 @@
                 android:layout_height="48dp"
                 android:background="@drawable/baseline_arrow_back_24"
                 android:backgroundTint="@color/white"
-                />
+                android:fontFamily="@font/samsungfont_bold" />
 
             <TextView
                 android:id="@+id/popBottomBtn"
                 android:layout_width="289dp"
                 android:layout_height="48dp"
+                android:fontFamily="@font/samsungfont_bold"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="일정 추가"
                 android:textColor="@color/white"
@@ -46,35 +51,49 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/baseline_arrow_forward_24"
-                />
+                android:fontFamily="@font/samsungfont_heavy" />
 
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordi_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="48dp"
-        >
+        android:layout_height="0dp"
+        android:paddingTop="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/next_step_btn_container"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_reservation_apply_top"
+        app:layout_constraintVertical_weight="4.6">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:orientation="vertical"
+            android:paddingTop="0dp"
             android:paddingBottom="16dp"
             >
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recycler_view_participants"
+                android:paddingStart="26dp"
+                tools:listitem="@layout/list_item_participant"
+                android:layout_marginBottom="8dp"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
+
             <TextView
                 android:id="@+id/question_who"
-                android:layout_width="131dp"
-                android:layout_height="22dp"
+                android:layout_width="150dp"
+                android:layout_height="24dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="26dp"
-                android:layout_marginTop="59dp"
                 android:alpha="0.64"
+                android:fontFamily="@font/samsungfont_bold"
                 android:gravity="top"
                 android:text="누가 참여하나요?"
                 android:textColor="#FCFCFC"
@@ -82,19 +101,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_reservation_apply_top" />
 
-            <TextView
-                android:id="@+id/some_id"
-                android:layout_width="118dp"
-                android:layout_height="77dp"
+            <EditText
+                android:id="@+id/edit_who"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginEnd="14dp"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/samsungfont_bold"
                 android:gravity="top"
-                android:text="태현"
+                android:inputType="textNoSuggestions"
                 android:textColor="#FCFCFC"
                 android:textSize="64sp"
+                tools:text="이름칸"
+                android:imeOptions="actionDone"
                 app:layout_constraintEnd_toEndOf="@+id/question_who"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/question_who" />
@@ -105,6 +128,36 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <LinearLayout
+        android:id="@+id/next_step_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coordi_layout"
+        app:layout_constraintVertical_weight="0.7"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="8dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <Button
+            android:layout_width="343dp"
+            android:layout_height="56dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/item_btn_16_corners"
+            android:textColor="@color/white"
+            android:fontFamily="@font/samsungfont_bold"
+            android:id="@+id/participant_add_btn"
+            android:text="참가자 추가"
+            android:textSize="22sp"
+            >
+        </Button>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

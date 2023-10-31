@@ -1,141 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    app:behavior_hideable="true"
-    app:behavior_peekHeight="36dp"
-    android:layout_height="500dp"
+    app:behavior_hideable="false"
+    app:behavior_draggable="false"
+    app:behavior_peekHeight="32dp"
+    android:paddingTop="22dp"
+    android:layout_height="384dp"
     android:background="@drawable/item_bottom_sheet_shape"
     android:id="@+id/bottom_sheet_where"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    >
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view_where"
+        tools:listitem="@layout/list_item_where"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
         >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/item_bottom_item_shape"
-            android:gravity="center|start"
-            android:padding="16dp"
-            android:paddingHorizontal="15dp"
-            android:text="2층 / 2-4"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|start"
-            android:paddingHorizontal="15dp"
-            android:padding="16dp"
-            android:text="2층 / 2-5"
-            android:background="@drawable/item_bottom_item_shape"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|start"
-            android:paddingHorizontal="15dp"
-            android:padding="16dp"
-            android:text="3층 / 308"
-            android:background="@drawable/item_bottom_item_shape"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|start"
-            android:paddingHorizontal="15dp"
-            android:padding="16dp"
-            android:text="8층 / 8-2"
-            android:background="@drawable/item_bottom_item_shape"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|start"
-            android:paddingHorizontal="15dp"
-            android:padding="16dp"
-            android:text="8층 / 8-1"
-            android:background="@drawable/item_bottom_item_shape"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|start"
-            android:paddingHorizontal="15dp"
-            android:padding="16dp"
-            android:text="7층 / 7-2"
-            android:background="@drawable/item_bottom_item_shape"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

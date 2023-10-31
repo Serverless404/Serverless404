@@ -87,28 +87,105 @@
                 android:orientation="horizontal"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
             >
-                <Button
-                    android:id="@+id/outPlaceBtn"
-                    android:layout_width="195dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Button" />
-
-                <Button
-                    android:id="@+id/mainPlaceBtn"
-                    android:layout_width="195dp"
+                <LinearLayout
+                    android:id="@+id/out_place_btn"
+                    android:layout_width="180dp"
                     android:layout_height="100dp"
+                    android:background="@drawable/item_btn_16_corners_white"
                     android:layout_weight="1"
-                    android:text="Button" />
+                    android:orientation="vertical"
+                    android:layout_marginRight="16dp"
+                    android:padding="16dp"
+                    >
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/building_outside_icon"
+                        app:tint="@color/blue"
+                        android:layout_gravity="center_horizontal"
+                    ></ImageView>
 
-                <Button
-                    android:id="@+id/youngPlaceBtn"
-                    android:layout_width="195dp"
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:text="외부"
+                        android:fontFamily="@font/samsungfont_bold"
+                        android:textColor="@color/blue"
+                        >
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/main_place_btn"
+                    android:layout_width="180dp"
                     android:layout_height="100dp"
+                    android:background="@drawable/item_btn_16_corners_white"
                     android:layout_weight="1"
-                    android:text="Button" />
+                    android:orientation="vertical"
+                    android:layout_marginRight="16dp"
+                    android:padding="16dp"
+                    >
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/building_big_icon"
+                        app:tint="@color/blue"
+                        android:layout_gravity="center_horizontal"
+                        ></ImageView>
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:text="본사"
+                        android:fontFamily="@font/samsungfont_bold"
+                        android:textColor="@color/blue"
+                        >
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/young_place_btn"
+                    android:layout_width="180dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/item_btn_16_corners_white"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    >
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/building_medium_icon"
+                        app:tint="@color/blue"
+                        android:layout_gravity="center_horizontal"
+                        ></ImageView>
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:text="영등"
+                        android:fontFamily="@font/samsungfont_bold"
+                        android:textColor="@color/blue"
+                        >
+                    </TextView>
+
+
+                </LinearLayout>
             </LinearLayout>
 
 
@@ -117,6 +194,36 @@
         <include layout="@layout/item_bottom_sheet_where"></include>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <LinearLayout
+        android:id="@+id/next_step_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_weight="0.7"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="8dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <Button
+            android:layout_width="343dp"
+            android:layout_height="56dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/item_btn_16_corners"
+            android:textColor="@color/white"
+            android:fontFamily="@font/samsungfont_bold"
+            android:id="@+id/where_finish_btn"
+            android:text="장소 설정 완료하기"
+            android:textSize="22sp"
+            >
+        </Button>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

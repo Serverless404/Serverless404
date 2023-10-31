@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="36dp"
+    android:layout_height="600dp"
+    android:background="@drawable/item_bottom_sheet_shape"
+    android:id="@+id/bottom_sheet_calculate"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_gravity="start"
+    >
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="50dp"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/gradient_back">
+
+        </com.airbnb.lottie.LottieAnimationView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="200dp"
+            android:text="가능한 시간"
+            android:fontFamily="@font/samsungfont_bold"
+            android:textAlignment="center"
+            android:textColor="#91919f"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="14 : 00"
+            android:fontFamily="@font/samsungfont_bold"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+    </FrameLayout>
+</LinearLayout>

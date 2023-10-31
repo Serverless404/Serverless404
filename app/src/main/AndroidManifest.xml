@@ -15,15 +15,21 @@
         android:theme="@style/Theme.ServerLess404"
         tools:targetApi="31">
         <activity
-            android:name=".DetailScheduleActivity"
-            android:exported="false"
-            android:label="@string/title_activity_detail_schedule"
-            android:theme="@style/Theme.ServerLess404" />
+            android:name=".ReservationApplyActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ReservationApplyTimeSelectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReservationApplyCalculateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReservationApplyLengthActivity"
+            android:exported="false" />
         <activity
             android:name=".CalandarMainActivity"
             android:launchMode="singleInstance"
             android:exported="true">
-
         </activity>
         <activity
             android:name=".MainActivity"
@@ -38,8 +44,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ReservationApplyActivity"
-            android:exported="true" />
+            android:name=".DetailScheduleActivity"
+            android:exported="false"
+            android:label="@string/title_activity_detail_schedule"
+            android:theme="@style/Theme.ServerLess404" />
     </application>
-
 </manifest>

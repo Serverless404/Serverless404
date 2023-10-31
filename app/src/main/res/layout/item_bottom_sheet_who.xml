@@ -1,100 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    app:behavior_hideable="true"
-    app:behavior_peekHeight="36dp"
-    android:layout_height="500dp"
+    app:behavior_hideable="false"
+    app:behavior_draggable="false"
+    app:behavior_peekHeight="32dp"
+    android:paddingTop="22dp"
+    android:layout_height="384dp"
     android:background="@drawable/item_bottom_sheet_shape"
     android:id="@+id/bottom_sheet_who"
-    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+<!--maxHeight로 높이 조절하기-->
+<!--item 하나당 70 차지 마지막에 + 10 해줌 높이 = 아이템 수 * 70 + 10 + 14 + 10=> -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view_who"
+        tools:listitem="@layout/list_item_who"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
     >
+    </androidx.recyclerview.widget.RecyclerView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|start"
-            android:paddingHorizontal="15dp"
-            android:layout_marginTop="16dp"
-            android:padding="16dp"
-            android:text="김태현 책임 / 정보기획파트"
-            android:background="@drawable/item_bottom_item_shape"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-        />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|start"
-            android:paddingHorizontal="15dp"
-            android:padding="16dp"
-            android:text="박태현 책임 / 계리지원파트"
-            android:background="@drawable/item_bottom_item_shape"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|start"
-            android:paddingHorizontal="15dp"
-            android:padding="16dp"
-            android:text="인태형 책임 / 인프라파트"
-            android:background="@drawable/item_bottom_item_shape"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|start"
-            android:paddingHorizontal="15dp"
-            android:padding="16dp"
-            android:text="시태현 책임 / 시스템운영파트"
-            android:background="@drawable/item_bottom_item_shape"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
