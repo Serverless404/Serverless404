@@ -90,7 +90,11 @@ class CalandarMainActivity : AppCompatActivity() {
         //일정 추가 버튼 설정
         addScheduleButton.setOnClickListener {
             val intent = Intent(this@CalandarMainActivity,ReservationApplyActivity::class.java)
-            intent.putExtra("owner",owner)
+            // 빈 스케줄 객체 만듬
+            val scheduleData = Schedule(owner)
+            var actionType = "create"
+            intent.putExtra("scheduleData", scheduleData)
+            intent.putExtra("actionType", actionType)
             startActivity(intent)
         }
         
@@ -118,7 +122,7 @@ class CalandarMainActivity : AppCompatActivity() {
                         val startTime = scheduleItem.startTime
                         val endTime = scheduleItem.endTime
                         val place = scheduleItem.place
-                        val participants : List<String> = scheduleItem.participants.split(',')
+                        val participants : ArrayList<String> = scheduleItem.participants.split(',').toTypedArray().toCollection(arrayListOf())
 
                         totalScheduleArrayList.add(Schedule(
                             owner,scheduleId,year,month, date,title,detail,startTime, endTime , participants , place
@@ -223,7 +227,7 @@ class CalandarMainActivity : AppCompatActivity() {
                             val startTime = scheduleItem.startTime
                             val endTime = scheduleItem.endTime
                             val place = scheduleItem.place
-                            val participants : List<String> = scheduleItem.participants.split(',')
+                            val participants : ArrayList<String> = scheduleItem.participants.split(',').toTypedArray().toCollection(arrayListOf())
 
                             totalScheduleArrayList.add(Schedule(
                                 owner,scheduleId,year,month, date,title,detail,startTime, endTime , participants , place
@@ -383,7 +387,7 @@ class RecyclerViewAdapter(
 
         holder.itemView.setOnClickListener{
             val intent = Intent(context,DetailScheduleActivity::class.java)
-            intent.putExtra("data",scheduleList[position])
+            intent.putExtra("scheduleData",scheduleList[position])
             context.startActivity(intent)
         }
     }

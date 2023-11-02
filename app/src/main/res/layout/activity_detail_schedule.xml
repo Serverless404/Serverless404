@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="일정 상세"
+                android:fontFamily="@font/samsungfont_medium"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="22sp"
@@ -48,6 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="2023년 10월 25일"
+        android:fontFamily="@font/samsungfont_medium"
         android:padding="5dp"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
@@ -62,6 +64,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="러닝크루 3차 회의"
+        android:fontFamily="@font/samsungfont_bold"
         android:breakStrategy="balanced"
         android:textColor="@color/white"
         android:textSize="34sp"
@@ -90,19 +93,25 @@
             >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_diversity_3_24"
-                android:contentDescription="참석자" />
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:padding="10dp"
+                android:src="@drawable/group_icon"
+                android:backgroundTint="@color/violet_back"
+                android:background="@drawable/item_btn_16_corners"
+                android:layout_marginRight="10dp"
+                ></ImageView>
 
             <TextView
                 android:id="@+id/detail_participants"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:gravity="center"
                 android:text="김태현,김동욱,우의강,조용호"
-                android:textColor="#292B2D"
+                android:fontFamily="@font/samsungfont_medium"
+                android:textSize="18sp"
+                android:textColor="@color/black"
                 android:paddingHorizontal="10dp"
                 />
 
@@ -124,19 +133,25 @@
             >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_chat_bubble_outline_24"
-                android:contentDescription="상세내용" />
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:padding="10dp"
+                android:src="@drawable/order_icon"
+                android:backgroundTint="@color/violet_back"
+                android:background="@drawable/item_btn_16_corners"
+                android:layout_marginRight="10dp"
+                ></ImageView>
 
             <TextView
                 android:id="@+id/detail_detail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:gravity="center"
+                android:fontFamily="@font/samsungfont_medium"
+                android:textSize="18sp"
                 android:text="러닝 크루 회식 장소 정하기"
-                android:textColor="#292B2D"
+                android:textColor="@color/black"
                 android:paddingHorizontal="10dp"
                 />
 
@@ -158,17 +173,23 @@
             >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_more_time_24"
-                android:contentDescription="시간" />
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:padding="10dp"
+                android:src="@drawable/time_icon"
+                android:backgroundTint="@color/violet_back"
+                android:background="@drawable/item_btn_16_corners"
+                android:layout_marginRight="10dp"
+                ></ImageView>
 
             <TextView
                 android:id="@+id/detail_time"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:gravity="center"
+                android:fontFamily="@font/samsungfont_medium"
+                android:textSize="18sp"
                 android:text="15:00 ~ 17:00"
                 android:textColor="#292B2D"
                 android:paddingHorizontal="10dp"
@@ -192,19 +213,25 @@
             >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_place_24"
-                android:contentDescription="장소" />
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:padding="10dp"
+                android:src="@drawable/location_icon"
+                android:backgroundTint="@color/violet_back"
+                android:background="@drawable/item_btn_16_corners"
+                android:layout_marginRight="10dp"
+                ></ImageView>
 
             <TextView
                 android:id="@+id/detail_place"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:gravity="center"
+                android:fontFamily="@font/samsungfont_medium"
+                android:textSize="18sp"
                 android:text="영등포 IT 센터 8-3"
-                android:textColor="#292B2D"
+                android:textColor="@color/black"
                 android:paddingHorizontal="10dp"
                 />
 
@@ -226,18 +253,24 @@
             >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_how_to_reg_24"
-                android:contentDescription="주최자" />
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:padding="10dp"
+                android:src="@drawable/owner_icon"
+                android:backgroundTint="@color/red_back"
+                android:background="@drawable/item_btn_16_corners"
+                android:layout_marginRight="10dp"
+                ></ImageView>
 
             <TextView
                 android:id="@+id/detail_owner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:gravity="center"
                 android:text="유지홍"
+                android:fontFamily="@font/samsungfont_medium"
+                android:textSize="18sp"
                 android:textColor="#292B2D"
                 android:paddingHorizontal="10dp"
                 />
@@ -264,6 +297,7 @@
             android:layout_height="wrap_content"
             android:text="수정"
             android:textColor="#003CDC"
+            android:fontFamily="@font/samsungfont_medium"
             android:textStyle="bold"
             android:background="@drawable/detail_button_background"
             android:layout_gravity="center"
@@ -278,6 +312,7 @@
             android:text="삭제"
             android:textStyle="bold"
             android:textColor="#003CDC"
+            android:fontFamily="@font/samsungfont_medium"
             android:background="@drawable/detail_button_background"
             android:layout_gravity="center"
             android:layout_weight="0.5"

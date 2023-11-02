@@ -61,6 +61,10 @@ class AvailableTimeAdapter(val availableTimeList: ArrayList<AvailableTimeDto>) :
         return timeList.size
     }
 
+    fun selectedItem(): AvailableTimeDto {
+        return timeList[selectedItemPosition]
+    }
+
     // 뷰 홀더
     inner class TimeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun updateViewHolder(text: String) {

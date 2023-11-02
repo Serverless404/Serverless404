@@ -5,26 +5,26 @@ import java.io.Serializable
 
 data class Schedule(
     @SerializedName("owner")
-    val owner: String,
+    val owner: String = "",
     @SerializedName("schedule_id")
-    val scheduleId: String,
+    var scheduleId: String = "",
     @SerializedName("year")
-    val year: String,
+    var year: String = "",
     @SerializedName("month")
-    val month: String,
+    var month: String = "",
     @SerializedName("date")
-    val date: String,
+    var date: String = "",
     @SerializedName("title")
-    val title: String,
+    var title: String = "",
     @SerializedName("detail")
-    val detail: String,
+    var detail: String = "",
     @SerializedName("start_time")
-    val startTime: String,
+    var startTime: String = "",
     @SerializedName("end_time")
-    val endTime: String,
+    var endTime: String = "",
     @SerializedName("participants")
-    val participants: List<String>,
+    var participants: ArrayList<String> = arrayListOf<String>(),
     @SerializedName("place")
-    val place: String
+    var place: String = ""
 ) : Serializable
 

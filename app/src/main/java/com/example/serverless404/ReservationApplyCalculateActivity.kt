@@ -29,6 +29,10 @@ class ReservationApplyCalculateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_apply_calculate)
 
+        // 메인화면에서 넘어온 스케쥴 데이터 받기
+        var scheduleData = intent.getSerializableExtra("scheduleData") as Schedule
+        var actionType = intent.getSerializableExtra("actionType") as String // 생성, 수정 단계 구분
+
         val bottomSheetBehavior: BottomSheetBehavior<*>?
         val secondBottomSheetBehavior: BottomSheetBehavior<*>?
         val popBottomBtn: TextView = findViewById(R.id.popBottomBtn)
@@ -91,9 +95,12 @@ class ReservationApplyCalculateActivity : AppCompatActivity() {
         val retrofitService = retrofit.create(RetrofitService::class.java)
 
         // 레트로핏 input_json 세팅
-        val participants = "유지홍, 조용호, 김태현"
+        val participants = scheduleData.participants.joinToString { "," }
+        Log.d("가능 시간 조회", "참가자 값 체크: $participants")
         val encodedParticipant = Base64.encodeToString(participants.toByteArray(), Base64.NO_WRAP)
         var inputJsonString = "{\"participants\":\"$encodedParticipant\",\"require_time\":\"90\"}"
+
+        Log.d("가능 시간 조회", "input값 체크: $inputJsonString")
 
         //레트로핏 HTTP 데이터 요청
         retrofitService.findScheduleAPI(inputJsonString)?.enqueue(object :
@@ -114,11 +121,6 @@ class ReservationApplyCalculateActivity : AppCompatActivity() {
 
                     Log.d("가능 시간 조회", "onResponse 성공: $availableTimeList")
 
-                    //recyclerViewAdapter 생성 및 recyclerView 그리기
-//                    recyclerViewAdapter = RecyclerViewAdapter(selectedScheduleArrayList, LayoutInflater.from(this@CalandarMainActivity), this@CalandarMainActivity)
-//                    recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-//                    recyclerView.adapter = recyclerViewAdapter
-//                    recyclerView.layoutManager = LinearLayoutManager(this@CalandarMainActivity)
                 }else{
                     // 통신이 실패한 경우(응답코드 3xx, 4xx 등)
                     Log.d("가능 시간 조회", "onResponse 실패")
@@ -133,6 +135,17 @@ class ReservationApplyCalculateActivity : AppCompatActivity() {
 
         fun moveToAnotherPage(){
             val intent = Intent(this, LastCheckReservation::class.java)
+            val selectedItem = timeAdapter.selectedItem()
+            scheduleData.date = selectedItem.date
+            scheduleData.startTime = selectedItem.startTime
+            scheduleData.endTime = selectedItem.endTime
+
+//            scheduleData.date = "20231130"
+//            scheduleData.startTime = "09:30"
+//            scheduleData.endTime = "11:30"
+
+            intent.putExtra("scheduleData", scheduleData)
+            intent.putExtra("actionType", actionType);
             startActivity(intent)
         }
 

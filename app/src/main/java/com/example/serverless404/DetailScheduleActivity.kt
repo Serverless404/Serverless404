@@ -18,10 +18,8 @@ class DetailScheduleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail_schedule)
 
         // 메인화면에서 넘어온 스케쥴 데이터 받기
-        val detailSchedule = intent.getSerializableExtra("data") as Schedule
+        val detailSchedule = intent.getSerializableExtra("scheduleData") as Schedule
         Log.d("data",detailSchedule.toString())
-
-
 
         val date = findViewById<TextView>(R.id.detail_date)
         val title = findViewById<TextView>(R.id.detail_title)

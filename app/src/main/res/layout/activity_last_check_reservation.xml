@@ -79,6 +79,23 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/samsungfont_heavy"
+                tools:text="회의의 주제 입니다"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:textSize="32sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_reservation_apply_top"
+                android:visibility="gone"
+            />
+
+            <TextView
                 android:id="@+id/guide_text"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
@@ -92,7 +109,7 @@
                 android:textColor="#FCFCFC"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar_reservation_apply_top" />
+                app:layout_constraintTop_toBottomOf="@+id/title_text" />
 
             <EditText
                 android:id="@+id/edit_title"
@@ -114,7 +131,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/guide_text"
                 tools:text="주제를 적어주세요"
-                android:visibility="gone"
             />
 
             <EditText
@@ -128,17 +144,15 @@
                 android:layout_marginEnd="14dp"
                 android:backgroundTint="@color/white"
                 android:fontFamily="@font/samsungfont_bold"
+                android:inputType="textNoSuggestions"
                 android:gravity="top"
                 android:imeOptions="actionDone"
-                android:inputType="textMultiLine"
-                android:lines="3"
-                android:minLines="3"
-                android:maxLines="3"
                 android:textColor="#FCFCFC"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="@+id/guide_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/guide_text"
+                android:visibility="gone"
                 tools:text="내용을 적어주세요" />
 
         </LinearLayout>
@@ -152,7 +166,7 @@
             android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_container">
-            
+
             <LinearLayout
                 android:layout_width="340dp"
                 android:layout_height="90dp"
@@ -176,6 +190,7 @@
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="60dp"
+                    android:id="@+id/participants_text"
                     android:text="김태현, 김동욱, 우의강 조용호, 유지홍, 박해용"
                     android:textColor="@color/black"
                     android:fontFamily="@font/samsungfont_medium"
@@ -208,6 +223,7 @@
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="60dp"
+                    android:id="@+id/place_text"
                     android:text="영등포 - 8/3"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black"
@@ -240,6 +256,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
+                    android:id="@+id/date_text"
                     android:text="20231101 - 11:00 ~ 12:30"
                     android:textColor="@color/black"
                     android:fontFamily="@font/samsungfont_medium"
@@ -272,6 +289,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
+                    android:id="@+id/detail_text"
                     android:text="러닝크루 테스트 회의"
                     android:textColor="@color/black"
                     android:fontFamily="@font/samsungfont_medium"

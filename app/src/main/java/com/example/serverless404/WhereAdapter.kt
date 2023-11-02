@@ -61,6 +61,10 @@ class WhereAdapter(val itemList: ArrayList<String>) :
         return whereList.size
     }
 
+    fun selectedItem(): String {
+        return whereList[selectedItemPosition]
+    }
+
     // 뷰 홀더
     inner class WhereViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun updateViewHolder(text: String) {

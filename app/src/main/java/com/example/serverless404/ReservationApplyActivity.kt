@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.compose.ui.res.integerArrayResource
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,13 +29,21 @@ import kotlin.concurrent.schedule
 class ReservationApplyActivity: AppCompatActivity() {
 
     val whoList = ArrayList<WhoItem>()
-    val participantList = ArrayList<String>()
+    var participantList = ArrayList<String>()
     var selectedPosition: Int= 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activty_reservation_apply)
+
+        // 메인화면에서 넘어온 스케쥴 데이터 받기
+        var scheduleData = intent.getSerializableExtra("scheduleData") as Schedule
+        var actionType = intent.getSerializableExtra("actionType") as String // 생성, 수정 단계 구분
+        // 넘어 온 데이터 기준 참가자 세팅
+        participantList = scheduleData.participants
+
+        Log.d("scheduleData",scheduleData.toString())
 
         val recycler_view_who = findViewById<RecyclerView>(R.id.recycler_view_who)
         val recycler_view_participant = findViewById<RecyclerView>(R.id.recycler_view_participants)
@@ -45,7 +54,7 @@ class ReservationApplyActivity: AppCompatActivity() {
         whoList.add(WhoItem("김태진", "CLOUD파트", isSelected = false))
         whoList.add(WhoItem("김태호", "시스템운영파트", isSelected = false))
         whoList.add(WhoItem("김태수", "PROCESS파트", isSelected = false))
-        whoList.add(WhoItem("김동욱", "PROCESS파트", isSelected = false))
+        whoList.add(WhoItem("김동욱", "정보기획파트", isSelected = false))
         whoList.add(WhoItem("김동수", "PROCESS파트", isSelected = false))
         whoList.add(WhoItem("조용호", "정보기획파트", isSelected = false))
         whoList.add(WhoItem("조용진", "CLOUD파트", isSelected = false))
@@ -85,6 +94,8 @@ class ReservationApplyActivity: AppCompatActivity() {
         // Navigagte
         fun moveToAnotherPage(){
             val intent = Intent(this, ReservationApplyWhereActivity::class.java)
+            intent.putExtra("scheduleData", scheduleData)
+            intent.putExtra("actionType", actionType);
             startActivity(intent)
         }
 
@@ -162,7 +173,6 @@ class ReservationApplyActivity: AppCompatActivity() {
 
     fun filterList(filterString: String, rawList: ArrayList<WhoItem>) : Pair<ArrayList<WhoItem>, Int> {
         val results = ArrayList<WhoItem>()
-
         if (filterString.trim { it <= ' '}.isEmpty()) {
             results.addAll(rawList)
             return Pair(results, results.size)

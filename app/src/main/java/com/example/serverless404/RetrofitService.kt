@@ -15,4 +15,7 @@ interface RetrofitService {
 
     @GET("findScheduleAPI")
     fun findScheduleAPI(@Header("input_json") req: String) : Call<List<AvailableTimeDto>>
+
+    @GET("createScheduleAPI")
+    fun createScheduleAPI(@Header("input_json") req: String) : Call<ResponseBody>
 }

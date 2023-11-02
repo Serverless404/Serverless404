@@ -23,6 +23,10 @@ class ReservationApplyWhereActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_apply_where)
 
+        // 메인화면에서 넘어온 스케쥴 데이터 받기
+        var scheduleData = intent.getSerializableExtra("scheduleData") as Schedule
+        var actionType = intent.getSerializableExtra("actionType") as String // 생성, 수정 단계 구분
+
         val recycler_view_where = findViewById<RecyclerView>(R.id.recycler_view_where)
 
         // 목록 만들어 놓기
@@ -116,6 +120,9 @@ class ReservationApplyWhereActivity : AppCompatActivity() {
 
         fun moveToAnotherPage(){
             val intent = Intent(this, ReservationApplyLengthActivity::class.java)
+            scheduleData.place = whereAdapter.selectedItem()
+            intent.putExtra("scheduleData", scheduleData)
+            intent.putExtra("actionType", actionType);
             startActivity(intent)
         }
 
