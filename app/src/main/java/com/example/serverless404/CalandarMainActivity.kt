@@ -42,14 +42,28 @@ import java.util.Calendar
 
 class CalandarMainActivity : AppCompatActivity() {
 
+    lateinit var calendar: MaterialCalendarView
+    lateinit var recyclerViewAdapter : RecyclerViewAdapter
+    lateinit var recyclerView : RecyclerView
+    var selectedScheduleArrayList = arrayListOf<Schedule>()
+    var totalScheduleArrayList : ArrayList<Schedule> = arrayListOf()
+    lateinit var eventDates : HashSet<CalendarDay>
+    lateinit var today : CalendarDay
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
+        // ONCREATE 시 SharedPreferences 에 상세페이지 에서 메인 이동 저장 데이터 초기화
+        val detailToMain : SharedPreferences = getSharedPreferences("detail_to_main", Activity.MODE_PRIVATE)
+        val spEditor = detailToMain.edit()
+        spEditor.putString("detail_to_main","FAIL")
+        spEditor.apply()
+        
         setContentView(R.layout.activity_calandar_main)
-        val today = CalendarDay.today()
-        var eventDates : HashSet<CalendarDay> = hashSetOf()
+        today = CalendarDay.today()
+        eventDates = hashSetOf()
 
         //레트로핏 주소 설정
         val retrofit = Retrofit.Builder().baseUrl("https://q3jz31f9wb.execute-api.ap-northeast-2.amazonaws.com/")
@@ -62,16 +76,13 @@ class CalandarMainActivity : AppCompatActivity() {
         var inputJsonString = "{\"owner\":\"$encodingOwner\",\"year\":\"${today.year}\",\"month\":\"${today.month + 1}\"}"
         Log.d("inputJsonString",inputJsonString)
 
-        lateinit var recyclerViewAdapter : RecyclerViewAdapter
-        var selectedScheduleArrayList = arrayListOf<Schedule>()
-        lateinit var recyclerView : RecyclerView
-        var totalScheduleArrayList : ArrayList<Schedule> = arrayListOf()
+
         val dateText : TextView = findViewById(R.id.scheduleDateTextView)
         val refreshIcon = findViewById<ImageView>(R.id.refreshImage)
         val addScheduleButton = findViewById<Button>(R.id.addScheduleButton)
 
         //달력 뷰
-        val calendar: MaterialCalendarView = findViewById(R.id.calendarView)
+        calendar = findViewById(R.id.calendarView)
 
         //한국어로 표현
         calendar.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
@@ -182,12 +193,23 @@ class CalandarMainActivity : AppCompatActivity() {
             }
 
             selectedScheduleArrayList = arrayListOf<Schedule>()
+
+            // 1-9 일 경우 앞에 0 붙인다.
+            var customDay = ""
+            if (date.day.toString().length == 1) {
+                customDay = "0" + date.day.toString()
+            } else {
+                customDay = date.day.toString()
+            }
+
             for (i in 0 until totalScheduleArrayList.size) {
                 val schedule = totalScheduleArrayList[i]
-                if (date.year.toString() == schedule.year && (date.month + 1).toString() == schedule.month && date.day.toString() == schedule.date){
+                if (date.year.toString() == schedule.year && (date.month + 1).toString() == schedule.month && customDay == schedule.date){
                     selectedScheduleArrayList.add(schedule)
                 }
             }
+
+            Log.d("날짜 선택",selectedScheduleArrayList.toString())
 
             //recyclerViewAdapter 생성 및 recyclerView 그리기
             recyclerViewAdapter = RecyclerViewAdapter(selectedScheduleArrayList, LayoutInflater.from(this@CalandarMainActivity),this@CalandarMainActivity)
@@ -265,9 +287,135 @@ class CalandarMainActivity : AppCompatActivity() {
             })
         }
 
+        // SharedPreferences 에 날짜 저장
+        val spYear : SharedPreferences = getSharedPreferences("year", Activity.MODE_PRIVATE)
+        val spMonth : SharedPreferences = getSharedPreferences("month", Activity.MODE_PRIVATE)
+        val spDay : SharedPreferences = getSharedPreferences("day", Activity.MODE_PRIVATE)
+
+        val spYearEditor = spYear.edit()
+        spYearEditor.putString("year",today.year.toString())
+        spYearEditor.apply()
+
+        val spMonthEditor = spMonth.edit()
+        spMonthEditor.putString("month",(today.month + 1).toString())
+        spMonthEditor.apply()
+
+        val spDayEditor = spDay.edit()
+        spDayEditor.putString("day",today.day.toString())
+        spDayEditor.apply()
+
         // 이 화면은, 왼쪽에서 오른쪽으로 슬라이딩 하면서 켜집니다.
         overridePendingTransition(R.anim.from_left_enter, 0)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("onResume 실행","SUCCESS")
+
+        // 상세페이지에서 왔을 경우 새로고침
+        val detailToMain : String = getSharedPreferences("detail_to_main", Activity.MODE_PRIVATE).getString("detail_to_main","") ?: ""
+        if (detailToMain == "SUCCESS") {
+            Log.d("ONRESUME 데이터 리셋 실행","SUCCESS")
+
+            totalScheduleArrayList = arrayListOf()
+            selectedScheduleArrayList = arrayListOf()
+
+            //레트로핏 주소 설정
+            val retrofit = Retrofit.Builder().baseUrl("https://q3jz31f9wb.execute-api.ap-northeast-2.amazonaws.com/")
+                .addConverterFactory(GsonConverterFactory.create()).build()
+            val retrofitService = retrofit.create(RetrofitService::class.java)
+
+            val spYear = getSharedPreferences("year",Activity.MODE_PRIVATE).getString("year",today.year.toString()) ?: today.year.toString()
+            val spMonth = getSharedPreferences("month",Activity.MODE_PRIVATE).getString("month",(today.month + 1).toString()) ?: (today.month + 1).toString()
+            val spDay = getSharedPreferences("day",Activity.MODE_PRIVATE).getString("day",today.day.toString()) ?: today.day.toString()
+
+            //현재 로그인 유저 정보 불러오기
+            val owner : String = getSharedPreferences("owner", Activity.MODE_PRIVATE).getString("owner","") ?: ""
+            val encodingOwner = Base64.encodeToString(owner.toByteArray(),Base64.NO_WRAP)
+            var inputJsonString = "{\"owner\":\"$encodingOwner\",\"year\":\"${spYear}\",\"month\":\"${spMonth}\"}"
+
+
+            //레트로핏 HTTP 데이터 요청
+            retrofitService.getScheduleListAPI(inputJsonString)?.enqueue(object : Callback<List<ScheduleDto>>{
+
+                @SuppressLint("SetTextI18n")
+                override fun onResponse(call: Call<List<ScheduleDto>>, response: Response<List<ScheduleDto>>) {
+                    if(response.isSuccessful){
+                        // 정상적으로 통신이 성공된 경우
+                        val resultList: List<ScheduleDto> = response.body() ?: arrayListOf()
+                        Log.d("일정 목록 조회", "onResponse 성공: $resultList")
+
+
+                        for (index in resultList.indices){
+                            val scheduleItem : ScheduleDto = resultList[index]
+                            Log.d("ONRESUME result",scheduleItem.toString())
+
+                            val owner = scheduleItem.owner
+                            val scheduleId = scheduleItem.scheduleId
+                            val year = scheduleItem.year
+                            val month = scheduleItem.month
+                            val date = scheduleItem.date
+                            val title = scheduleItem.title
+                            val detail = scheduleItem.detail
+                            val startTime = scheduleItem.startTime
+                            val endTime = scheduleItem.endTime
+                            val place = scheduleItem.place
+                            val participants : ArrayList<String> = scheduleItem.participants.split(',').toTypedArray().toCollection(arrayListOf())
+
+                            totalScheduleArrayList.add(Schedule(
+                                owner,scheduleId,year,month, date,title,detail,startTime, endTime , participants , place
+                            ))
+
+                            //이벤트가 있는날 점 표시하기 위해 set에 해당 날짜들 추가
+                            eventDates.add(CalendarDay(year.toInt(),month.toInt() - 1,date.toInt()))
+
+                        }
+
+
+                        for (i in 0 until totalScheduleArrayList.size) {
+                            val schedule = totalScheduleArrayList[i]
+                            if (spYear == schedule.year && spMonth == schedule.month && spDay == schedule.date){
+                                selectedScheduleArrayList.add(schedule)
+                            }
+                        }
+
+                        //recyclerViewAdapter 생성 및 recyclerView 그리기
+                        recyclerViewAdapter = RecyclerViewAdapter(selectedScheduleArrayList, LayoutInflater.from(this@CalandarMainActivity), this@CalandarMainActivity)
+                        recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+                        recyclerView.adapter = recyclerViewAdapter
+                        recyclerView.layoutManager = LinearLayoutManager(this@CalandarMainActivity)
+
+                        val selectedDate = CalendarDay(spYear.toInt(),spMonth.toInt() - 1,spDay.toInt())
+
+                        //초기 선택 날짜 처리(현재 날짜 처리)
+                        calendar.selectedDate = selectedDate
+
+                        calendar.addDecorator(SundayDecorator())
+                        calendar.addDecorator(SaturDayDecorator())
+                        calendar.addDecorator(EventDecorator(eventDates))
+
+                        val dateText : TextView = findViewById(R.id.scheduleDateTextView)
+
+                        if (spYear == today.year.toString() && spMonth == (today.month + 1).toString() && spDay == today.day.toString()){
+                            dateText.text = "${spYear}년 ${spMonth}월 ${spDay}일 (오늘)"
+                        } else {
+                            dateText.text = "${spYear}년 ${spMonth}월 ${spDay}일"
+                        }
+
+                    }else{
+                        // 통신이 실패한 경우(응답코드 3xx, 4xx 등)
+                        Log.d("일정 목록 조회", "onResponse 실패")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<ScheduleDto>>, t: Throwable) {
+                    // 통신 실패 (인터넷 끊킴, 예외 발생 등 시스템적인 이유)
+                    Log.d("일정 목록 조회", "onFailure 에러: " + t.message.toString());
+                }
+
+            })
+        }
     }
 
     //뒤로가기 두번 클릭 시 앱 종료
@@ -283,7 +431,7 @@ class CalandarMainActivity : AppCompatActivity() {
 
 }
 
-class TodayDecorator(): com.prolificinteractive.materialcalendarview.DayViewDecorator {
+class TodayDecorator(): DayViewDecorator {
     private var date = CalendarDay.today()
 
     override fun shouldDecorate(day: CalendarDay?): Boolean {

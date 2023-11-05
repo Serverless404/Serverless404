@@ -1,7 +1,9 @@
 package com.example.serverless404
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -42,11 +44,35 @@ class DetailScheduleActivity : AppCompatActivity() {
         place.text = detailSchedule.place
         owner.text = detailSchedule.owner
 
+        // SharedPreferences 에 상세페이지 에서 메인 이동 저장
+        val detailToMain : SharedPreferences = getSharedPreferences("detail_to_main", Activity.MODE_PRIVATE)
+        val spEditor = detailToMain.edit()
+        spEditor.putString("detail_to_main","SUCCESS")
+        spEditor.apply()
+
+        // SharedPreferences 에 날짜 저장
+        val spYear : SharedPreferences = getSharedPreferences("year", Activity.MODE_PRIVATE)
+        val spMonth : SharedPreferences = getSharedPreferences("month", Activity.MODE_PRIVATE)
+        val spDay : SharedPreferences = getSharedPreferences("day", Activity.MODE_PRIVATE)
+
+        val spYearEditor = spYear.edit()
+        spYearEditor.putString("year",detailSchedule.year)
+        spYearEditor.apply()
+
+        val spMonthEditor = spMonth.edit()
+        spMonthEditor.putString("month",detailSchedule.month)
+        spMonthEditor.apply()
+
+        val spDayEditor = spDay.edit()
+        spDayEditor.putString("day",detailSchedule.date)
+        spDayEditor.apply()
+
         // 툴바의 홈가기 버튼 클릭 처리
         firstPageIcon.setOnClickListener {
             val intent = Intent(this@DetailScheduleActivity,CalandarMainActivity::class.java)
 //            intent.putExtra("data",detailSchedule)
             startActivity(intent)
+
             finish()
         }
 
