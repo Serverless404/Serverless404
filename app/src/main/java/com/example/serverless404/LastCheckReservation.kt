@@ -46,7 +46,7 @@ class LastCheckReservation : AppCompatActivity() {
         var isSuccess = false;
 
         // 데이터 세팅
-        participantText.text = scheduleData.participants.toString()
+        participantText.text = scheduleData.participants.joinToString(",")
         placeText.text = scheduleData.place
         dateText.text = "${scheduleData.date} / ${scheduleData.startTime} ~ ${scheduleData.endTime}"
 
@@ -115,7 +115,7 @@ class LastCheckReservation : AppCompatActivity() {
             scheduleData.date = scheduleData.date.substring(6 until 8)
 
             // 요청 보낼 데이터 세팅 인코딩
-            val participants = Base64.encodeToString(scheduleData.participants.joinToString { "," }.toByteArray(), Base64.NO_WRAP)
+            val participants = Base64.encodeToString(scheduleData.participants.joinToString(",").toByteArray(), Base64.NO_WRAP)
             val title = Base64.encodeToString(scheduleData.title.toByteArray(), Base64.NO_WRAP)
             val detail = Base64.encodeToString(scheduleData.detail.toByteArray(), Base64.NO_WRAP)
             val place = Base64.encodeToString(scheduleData.place.toByteArray(), Base64.NO_WRAP)

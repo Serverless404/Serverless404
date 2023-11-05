@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.slider.Slider
 import com.google.android.material.slider.Slider.OnSliderTouchListener
+import kotlin.math.min
 
 class ReservationApplyLengthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +33,8 @@ class ReservationApplyLengthActivity : AppCompatActivity() {
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLength)
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+
+        minuteText.text = "90분"
 
         timeSlider.addOnChangeListener { slider, value, fromUser ->
             minuteText.text = "${value.toInt()}분"

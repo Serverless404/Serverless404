@@ -95,7 +95,7 @@ class ReservationApplyCalculateActivity : AppCompatActivity() {
         val retrofitService = retrofit.create(RetrofitService::class.java)
 
         // 레트로핏 input_json 세팅
-        val participants = scheduleData.participants.joinToString { "," }
+        val participants = scheduleData.participants.joinToString(",")
         Log.d("가능 시간 조회", "참가자 값 체크: $participants")
         val encodedParticipant = Base64.encodeToString(participants.toByteArray(), Base64.NO_WRAP)
         var inputJsonString = "{\"participants\":\"$encodedParticipant\",\"require_time\":\"90\"}"

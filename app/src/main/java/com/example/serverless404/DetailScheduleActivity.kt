@@ -5,11 +5,18 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class DetailScheduleActivity : AppCompatActivity() {
@@ -76,6 +83,64 @@ class DetailScheduleActivity : AppCompatActivity() {
             finish()
         }
 
+        // 삭제 레트로핏
+        // 삭제 후 홈 화면 이동
+        val retrofit = Retrofit.Builder().baseUrl("https://6kerrjpzcj.execute-api.ap-northeast-2.amazonaws.com/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+        val retrofitService = retrofit.create(RetrofitService::class.java)
+
+        fun callDeleteSchedule() {
+            // 요청 보낼 데이터 세팅 인코딩
+            val owner = Base64.encodeToString(detailSchedule.owner.toByteArray(), Base64.NO_WRAP)
+            val scheduleId = detailSchedule.scheduleId
+            // 레트로핏 input_json 세팅
+            var inputJsonString = "{\"owner\":\"$owner\",\"schedule_id\":\"$scheduleId\"}"
+
+            retrofitService.deleteScheduleAPI(inputJsonString)?.enqueue(object :
+                Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                        if (response.isSuccessful) {
+                            // 정상적으로 통신이 성공된 경우
+                            val resultString: String = response.body()?.string() ?: ""
+                            Log.d("일정 삭제 api 성공", "onResponse 성공: $resultString")
+
+                            if (resultString.contains("SUCCESS")) {
+                                val intent = Intent(this@DetailScheduleActivity,CalandarMainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        } else {
+                            Log.d("일정 삭제 조회", "onResponse 실패")
+                        }
+                }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        // 통신 실패 (인터넷 끊킴, 예외 발생 등 시스템적인 이유)
+                        Log.d("일정 삭제 조회", "onFailure 에러: " + t.message.toString());
+                    }
+                }
+            )
+        }
+
+        deleteButton.setOnClickListener {
+            callDeleteSchedule()
+        }
+
+        // 수정으로 이동
+        fun moveToAnotherPage(){
+            val intent = Intent(this, ReservationApplyActivity::class.java)
+
+            intent.putExtra("scheduleData", detailSchedule)
+            intent.putExtra("actionType", "modify");
+            startActivity(intent)
+        }
+
+        modifyButton.setOnClickListener {
+            moveToAnotherPage()
+        }
     }
 }
 

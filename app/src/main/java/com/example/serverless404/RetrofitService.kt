@@ -18,4 +18,10 @@ interface RetrofitService {
 
     @GET("createScheduleAPI")
     fun createScheduleAPI(@Header("input_json") req: String) : Call<ResponseBody>
+
+    @GET("deleteScheduleAPI")
+    fun deleteScheduleAPI(@Header("input_json") req: String) : Call<ResponseBody>
+
+    @GET("getUserListAPI")
+    fun getUserListAPI(@Header("input_json") req: String) : Call<List<User>>
 }

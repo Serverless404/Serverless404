@@ -21,10 +21,11 @@
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_height="30dp"
+        android:paddingTop="10dp"
         android:layout_marginLeft="30dp"
         android:text="러닝크루 회의"
+        android:fontFamily="@font/samsungfont_medium"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -34,8 +35,10 @@
     <TextView
         android:id="@+id/timeTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:paddingTop="5dp"
         android:text="15:00 ~ 15:30"
+        android:fontFamily="@font/samsungfont_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/titleTextView"
         app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
@@ -43,8 +46,10 @@
     <TextView
         android:id="@+id/countTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="참석 인원: 3명"
+        android:paddingTop="5dp"
+        android:fontFamily="@font/samsungfont_regular"
         app:layout_constraintBottom_toBottomOf="@id/timeTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/timeTextView" />
