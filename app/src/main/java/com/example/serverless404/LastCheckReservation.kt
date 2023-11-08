@@ -1,5 +1,6 @@
 package com.example.serverless404
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -21,6 +23,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class LastCheckReservation : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_last_check_reservation)
@@ -50,6 +53,11 @@ class LastCheckReservation : AppCompatActivity() {
         placeText.text = scheduleData.place
         dateText.text = "${scheduleData.date} / ${scheduleData.startTime} ~ ${scheduleData.endTime}"
 
+        if (scheduleData.scheduleId == "") {
+            finishBtn.isEnabled = false
+            finishBtn.setBackgroundResource(R.drawable.item_btn_16_corners_disabled);
+        }
+
         editTitle.setOnEditorActionListener { textView, action, event ->
             var handled = false
 
@@ -69,6 +77,8 @@ class LastCheckReservation : AppCompatActivity() {
                 editTitle.visibility = View.GONE
                 editContent.visibility = View.VISIBLE
 
+                finishBtn.isEnabled = true
+                finishBtn.setBackgroundResource(R.drawable.item_btn_16_corners_enabled);
                 handled = true
             }
 

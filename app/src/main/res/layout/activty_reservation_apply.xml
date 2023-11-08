@@ -25,7 +25,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="start"
             android:orientation="horizontal">
 
             <Button
@@ -45,13 +45,6 @@
                 android:text="일정 추가"
                 android:textColor="@color/white"
                 android:textSize="42px"></TextView>
-
-            <Button
-                android:id="@+id/nextBtn"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/baseline_arrow_forward_24"
-                android:fontFamily="@font/samsungfont_heavy" />
 
         </LinearLayout>
 

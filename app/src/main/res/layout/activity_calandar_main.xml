@@ -75,19 +75,39 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF" />
 
-        <Button
-            android:id="@+id/addScheduleButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:orientation="horizontal"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/add_schedule_button_background"
-            android:drawableStart="@drawable/baseline_attach_file_24"
-            android:paddingHorizontal="60dp"
-            android:text="일정 추가"
-            android:fontFamily="@font/samsungfont_medium"
-            android:textColor="#454343"
-            android:textSize="20sp" />
+            >
+            <Button
+                android:id="@+id/addGeneralButton"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/add_schedule_button_background"
+                android:drawableStart="@drawable/baseline_attach_file_24"
+                android:text="일정 추가"
+                android:fontFamily="@font/samsungfont_medium"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <Button
+                android:id="@+id/addScheduleButton"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/add_schedule_button_background"
+                android:drawableStart="@drawable/baseline_attach_file_24"
+                android:text="회의 추가"
+                android:fontFamily="@font/samsungfont_medium"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

@@ -12,5 +12,6 @@
     <color name="violet_back">#EEE5FF</color>
     <color name="violet_icon">#7F3DFF</color>
     <color name="red_back">#FFE2E4</color>
+    <color name="grey">#d3d3d3</color>
 
 </resources>

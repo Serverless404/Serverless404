@@ -48,8 +48,10 @@ class ReservationApplyActivity: AppCompatActivity() {
         // 메인화면에서 넘어온 스케쥴 데이터 받기
         var scheduleData = intent.getSerializableExtra("scheduleData") as Schedule
         var actionType = intent.getSerializableExtra("actionType") as String // 생성, 수정 단계 구분
+        Log.d("scheduleData",scheduleData.toString())
+        Log.d("actionType",actionType)
         // 넘어 온 데이터 기준 참가자 세팅
-        if (actionType == "modify") {
+        if (actionType == "edit" && scheduleData.participants.size != 0) {
             participantList = scheduleData.participants
         } else {
             participantList.add(scheduleData.owner)
@@ -121,7 +123,6 @@ class ReservationApplyActivity: AppCompatActivity() {
         val editTextWho: EditText = findViewById(R.id.edit_who)
         val backBtn: Button = findViewById(R.id.backBtn)
         val addBtn: Button = findViewById(R.id.participant_add_btn)
-        val nextBtn: Button = findViewById(R.id.nextBtn)
         val bottomSheetWho: View = findViewById(R.id.bottom_sheet_who)
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetWho)

@@ -134,7 +134,7 @@ class DetailScheduleActivity : AppCompatActivity() {
             val intent = Intent(this, ReservationApplyActivity::class.java)
 
             intent.putExtra("scheduleData", detailSchedule)
-            intent.putExtra("actionType", "modify");
+            intent.putExtra("actionType", "edit");
             startActivity(intent)
         }
 

@@ -32,12 +32,12 @@ class ReservationApplyCalculateActivity : AppCompatActivity() {
         // 메인화면에서 넘어온 스케쥴 데이터 받기
         var scheduleData = intent.getSerializableExtra("scheduleData") as Schedule
         var actionType = intent.getSerializableExtra("actionType") as String // 생성, 수정 단계 구분
+        Log.d("scheduleData",scheduleData.toString())
 
         val bottomSheetBehavior: BottomSheetBehavior<*>?
         val secondBottomSheetBehavior: BottomSheetBehavior<*>?
         val popBottomBtn: TextView = findViewById(R.id.popBottomBtn)
         val backBtn: Button = findViewById(R.id.backBtn)
-        val nextBtn: Button = findViewById(R.id.nextBtn)
         val bottomSheetCalculate: View = findViewById(R.id.bottom_sheet_calculate)
         val bottomSheetTimeSelect: View = findViewById(R.id.bottom_sheet_time_select)
         val randomTimeText: TextView = findViewById(R.id.random_time_text)

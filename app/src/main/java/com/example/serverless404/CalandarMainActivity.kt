@@ -49,6 +49,7 @@ class CalandarMainActivity : AppCompatActivity() {
     var totalScheduleArrayList : ArrayList<Schedule> = arrayListOf()
     lateinit var eventDates : HashSet<CalendarDay>
     lateinit var today : CalendarDay
+    var selectedDate: String = ""
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,6 +81,7 @@ class CalandarMainActivity : AppCompatActivity() {
         val dateText : TextView = findViewById(R.id.scheduleDateTextView)
         val refreshIcon = findViewById<ImageView>(R.id.refreshImage)
         val addScheduleButton = findViewById<Button>(R.id.addScheduleButton)
+        val addGeneralButton = findViewById<Button>(R.id.addGeneralButton)
 
         //달력 뷰
         calendar = findViewById(R.id.calendarView)
@@ -98,12 +100,27 @@ class CalandarMainActivity : AppCompatActivity() {
             overridePendingTransition(0,0)
         }
 
-        //일정 추가 버튼 설정
+        // 회의 추가 버튼 설정
         addScheduleButton.setOnClickListener {
             val intent = Intent(this@CalandarMainActivity,ReservationApplyActivity::class.java)
             // 빈 스케줄 객체 만듬
             val scheduleData = Schedule(owner)
             var actionType = "create"
+            intent.putExtra("scheduleData", scheduleData)
+            intent.putExtra("actionType", actionType)
+            startActivity(intent)
+        }
+
+        // 일반 일정 추가 버튼
+        addGeneralButton.setOnClickListener {
+            Log.d("일반 일정 만들기", "선택된 날짜: " + selectedDate);
+
+            val intent = Intent(this@CalandarMainActivity,ReservationApplyActivity::class.java)
+            // 빈 스케줄 객체 만듬
+            val scheduleData = Schedule(owner)
+            // 오늘 날짜 넣어줘야함
+            scheduleData.date = selectedDate
+            var actionType = "edit" // edit과 일반 일정의 flow가 같음
             intent.putExtra("scheduleData", scheduleData)
             intent.putExtra("actionType", actionType)
             startActivity(intent)
@@ -191,6 +208,8 @@ class CalandarMainActivity : AppCompatActivity() {
             } else {
                 dateText.text = "${date.year}년 ${date.month + 1}월 ${date.day}일"
             }
+
+            selectedDate = date.year.toString() + (date.month + 1).toString().padStart(2, '0') + date.day.toString().padStart(2, '0')
 
             selectedScheduleArrayList = arrayListOf<Schedule>()
 

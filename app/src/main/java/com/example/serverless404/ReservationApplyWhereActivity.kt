@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.Button
@@ -26,6 +27,7 @@ class ReservationApplyWhereActivity : AppCompatActivity() {
         // 메인화면에서 넘어온 스케쥴 데이터 받기
         var scheduleData = intent.getSerializableExtra("scheduleData") as Schedule
         var actionType = intent.getSerializableExtra("actionType") as String // 생성, 수정 단계 구분
+        Log.d("scheduleData",scheduleData.toString())
 
         val recycler_view_where = findViewById<RecyclerView>(R.id.recycler_view_where)
 
@@ -66,7 +68,6 @@ class ReservationApplyWhereActivity : AppCompatActivity() {
         val bottomSheetBehavior: BottomSheetBehavior<*>?
         val popBottomBtn: TextView = findViewById(R.id.popBottomBtn)
         val backBtn: Button = findViewById(R.id.backBtn)
-        val nextBtn: Button = findViewById(R.id.nextBtn)
         val bottomSheetWhere: View = findViewById(R.id.bottom_sheet_where)
         val outBtn: LinearLayout = findViewById(R.id.out_place_btn)
         val mainBtn: LinearLayout = findViewById(R.id.main_place_btn)
