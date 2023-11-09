@@ -164,7 +164,16 @@ class CalandarMainActivity : AppCompatActivity() {
 
                     for (i in 0 until totalScheduleArrayList.size) {
                         val schedule = totalScheduleArrayList[i]
-                        if (today.year.toString() == schedule.year && (today.month + 1).toString() == schedule.month && today.day.toString() == schedule.date){
+
+                        // 1-9 일 경우 앞에 0 붙인다.
+                        var customDay = ""
+                        if (today.day.toString().length == 1) {
+                            customDay = "0" + today.day.toString()
+                        } else {
+                            customDay = today.day.toString()
+                        }
+
+                        if (today.year.toString() == schedule.year && (today.month + 1).toString() == schedule.month && customDay == schedule.date){
                             selectedScheduleArrayList.add(schedule)
                         }
                     }
@@ -185,7 +194,6 @@ class CalandarMainActivity : AppCompatActivity() {
 
                     //초기 날짜 텍스트 설정
                     dateText.text = "${today.year}년 ${today.month + 1}월 ${today.day}일 (오늘)"
-
 
                 }else{
                     // 통신이 실패한 경우(응답코드 3xx, 4xx 등)

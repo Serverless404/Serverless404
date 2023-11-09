@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
                 myToast.setGravity(Gravity.CENTER, 0, 0)
                 myToast.show()
             } else {
-                retrofitService.login("{\"id\":\"taehyun16.kim\", \"pw\":\"1234\"}")
+                retrofitService.login("{\"id\":\"${idEditText.text}\", \"pw\":\"1234\"}")
                     ?.enqueue(object : Callback<ResponseBody> {
                         override fun onResponse(
                             call: Call<ResponseBody>,
@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                                 // 통신이 실패한 경우(응답코드 3xx, 4xx 등)
                                 Log.d("로그인", "onResponse 실패")
 
-                                myToast = CustomToast(applicationContext, "서버와 통신에 실패하였습니다.")
+                                myToast = CustomToast(applicationContext, "아이디와 패스워드를 다시 확인해 주세요.")
                                 myToast.setGravity(Gravity.CENTER, 0, 0)
                                 myToast.show()
                             }
