@@ -128,6 +128,17 @@ class ReservationApplyActivity: AppCompatActivity() {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetWho)
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
 
+        if (actionType == "edit" && scheduleData.participants.size != 0) {
+            addBtn.setText("참가자 등록 완료")
+        }
+
+        backBtn.setOnClickListener {
+            val intent = Intent(this, CalandarMainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            finish()
+        }
+
         // Navigagte
         fun moveToAnotherPage(){
             val intent = Intent(this, ReservationApplyWhereActivity::class.java)

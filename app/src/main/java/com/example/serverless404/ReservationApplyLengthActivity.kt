@@ -36,6 +36,15 @@ class ReservationApplyLengthActivity : AppCompatActivity() {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLength)
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
 
+        backBtn.setOnClickListener {
+            val intent = Intent(this, ReservationApplyWhereActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            intent.putExtra("scheduleData", scheduleData)
+            intent.putExtra("actionType", actionType);
+            startActivity(intent)
+            finish()
+        }
+
         // 회의 생성
         if (actionType == "create") {
             rangeSlider.visibility = View.GONE

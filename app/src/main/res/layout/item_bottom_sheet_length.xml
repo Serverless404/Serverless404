@@ -60,6 +60,7 @@
         app:haloColor="@color/skyblue"
         app:haloRadius="16dp"
         app:tickVisible="false"
+        app:labelBehavior="gone"
         android:layout_gravity="center"
         android:layout_height="40dp"
         android:stepSize="30.0"

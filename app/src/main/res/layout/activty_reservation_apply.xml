@@ -14,18 +14,19 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#003cdc"
-        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/coordi_layout"
+        android:contentInsetStart="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="0.7">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <Button
@@ -34,17 +35,25 @@
                 android:layout_height="48dp"
                 android:background="@drawable/baseline_arrow_back_24"
                 android:backgroundTint="@color/white"
-                android:fontFamily="@font/samsungfont_bold" />
+                android:fontFamily="@font/samsungfont_bold"
+                android:gravity="center_vertical" />
 
             <TextView
                 android:id="@+id/popBottomBtn"
-                android:layout_width="289dp"
+                android:layout_width="300dp"
                 android:layout_height="48dp"
                 android:fontFamily="@font/samsungfont_bold"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="일정 추가"
                 android:textColor="@color/white"
-                android:textSize="42px"></TextView>
+                android:textSize="24sp"></TextView>
+
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:fontFamily="@font/samsungfont_bold"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"></TextView>
 
         </LinearLayout>
 

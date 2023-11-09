@@ -46,6 +46,15 @@ class ReservationApplyCalculateActivity : AppCompatActivity() {
         val finishBtn = findViewById<Button>(R.id.time_finish_btn)
         val guideText = findViewById<TextView>(R.id.guide_text)
 
+        backBtn.setOnClickListener {
+            val intent = Intent(this, ReservationApplyWhereActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            intent.putExtra("scheduleData", scheduleData)
+            intent.putExtra("actionType", actionType);
+            startActivity(intent)
+            finish()
+        }
+
         var linearManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         var timeAdapter = AvailableTimeAdapter(initList)

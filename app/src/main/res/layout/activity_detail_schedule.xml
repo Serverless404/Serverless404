@@ -13,6 +13,8 @@
         android:background="#003CDC"
         android:paddingVertical="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -32,11 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="일정 상세"
-                android:fontFamily="@font/samsungfont_medium"
+                android:fontFamily="@font/samsungfont_bold"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textSize="24sp" />
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

@@ -76,6 +76,15 @@ class ReservationApplyWhereActivity : AppCompatActivity() {
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetWhere)
 
+        backBtn.setOnClickListener {
+            val intent = Intent(this, ReservationApplyActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            intent.putExtra("scheduleData", scheduleData)
+            intent.putExtra("actionType", actionType);
+            startActivity(intent)
+            finish()
+        }
+
         // 버튼 누를 때 마다 리스트 변경
         outBtn.setOnClickListener{
             whereAdapter = WhereAdapter(whereOutList)

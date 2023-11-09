@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import okhttp3.ResponseBody
@@ -35,6 +36,7 @@ class LastCheckReservation : AppCompatActivity() {
         var actionType = intent.getSerializableExtra("actionType") as String // 생성, 수정 단계 구분
 
         val finishBtn = findViewById<Button>(R.id.check_finish_btn)
+        val backBtn = findViewById<Button>(R.id.backBtn)
         val participantText = findViewById<TextView>(R.id.participants_text)
         val placeText = findViewById<TextView>(R.id.place_text)
         val dateText = findViewById<TextView>(R.id.date_text)
@@ -44,6 +46,20 @@ class LastCheckReservation : AppCompatActivity() {
         val editContent = findViewById<EditText>(R.id.edit_content) // 처음에 gone
         val guideText = findViewById<TextView>(R.id.guide_text)
         val titleText = findViewById<TextView>(R.id.title_text) // 처음에 gone
+
+        if (actionType == "edit" && scheduleData.title != "" && scheduleData.detail != "") {
+            editTitle.setText(scheduleData.title)
+            editContent.setText(scheduleData.detail)
+        }
+
+        backBtn.setOnClickListener {
+            val intent = Intent(this, ReservationApplyCalculateActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            intent.putExtra("scheduleData", scheduleData)
+            intent.putExtra("actionType", actionType);
+            startActivity(intent)
+            finish()
+        }
 
         // api 첫 성공 플래그
         var isSuccess = false;
@@ -108,21 +124,54 @@ class LastCheckReservation : AppCompatActivity() {
             handled
         }
 
-
+        val creatUrl = "https://lbc97qf2hj.execute-api.ap-northeast-2.amazonaws.com/createScheduleAPI"
+        val deleteUrl = "https://6kerrjpzcj.execute-api.ap-northeast-2.amazonaws.com/deleteScheduleAPI"
 
         // 스케줄 생성 요청
         // 레트로핏 세팅
-        val retrofit = Retrofit.Builder().baseUrl("https://lbc97qf2hj.execute-api.ap-northeast-2.amazonaws.com/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
+        val retrofit = Retrofit.Builder().baseUrl("https://6kerrjpzcj.execute-api.ap-northeast-2.amazonaws.com/").addConverterFactory(GsonConverterFactory.create()).build()
         val retrofitService = retrofit.create(RetrofitService::class.java)
+
+        fun editDeleteSchedule() {
+            val owner = Base64.encodeToString(scheduleData.owner.toByteArray(), Base64.NO_WRAP);
+
+            var inputJsonString =
+                "{\"owner\":\"$owner\",\"schedule_id\":\"${scheduleData.scheduleId}\"}"
+
+            retrofitService.editDeleteScheduleAPI(inputJsonString, deleteUrl)?.enqueue(object :
+                Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if (response.isSuccessful) {
+                        // 정상적으로 통신이 성공된 경우
+                        val resultString: String = response.body()?.string() ?: ""
+                        Log.d("수정 전 일정 삭제", "onResponse 성공: $resultString")
+                    } else {
+                        // 통신이 실패한 경우(응답코드 3xx, 4xx 등)
+                        Log.d("수정 전 일정 삭제", "onResponse 실패")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    // 통신 실패 (인터넷 끊킴, 예외 발생 등 시스템적인 이유)
+                    Log.d("수정 전 일정 삭제", "onFailure 에러: " + t.message.toString());
+                }
+            })
+        }
 
         fun callCreateSchedule() {
             // 레트로핏 input_json 세팅
+            if (scheduleData.scheduleId == "") { // 처음 만들때만
+                scheduleData.scheduleId = "${scheduleData.date}${scheduleData.startTime.replace(":", "")}"
+                scheduleData.year = "${scheduleData.date.substring(0 until 4)}"
+                scheduleData.month = "${scheduleData.date.substring(4 until 6)}"
+                scheduleData.date = scheduleData.date.substring(6 until 8)
+            } else {
+                scheduleData.scheduleId = "${scheduleData.year}${scheduleData.month}${scheduleData.date}${scheduleData.startTime.replace(":", "")}"
+            }
 
-            scheduleData.scheduleId = "${scheduleData.date}${scheduleData.startTime.replace(":", "")}"
-            scheduleData.year = "${scheduleData.date.substring(0 until 4)}"
-            scheduleData.month = "${scheduleData.date.substring(4 until 6)}"
-            scheduleData.date = scheduleData.date.substring(6 until 8)
 
             // 요청 보낼 데이터 세팅 인코딩
             val participants = Base64.encodeToString(scheduleData.participants.joinToString(",").toByteArray(), Base64.NO_WRAP)
@@ -135,7 +184,7 @@ class LastCheckReservation : AppCompatActivity() {
 
                 var inputJsonString = "{\"owner\":\"$owner\",\"schedule_id\":\"${scheduleData.scheduleId}\",\"date\":\"${scheduleData.date}\",\"detail\":\"$detail\",\"end_time\":\"${scheduleData.endTime}\",\"month\":\"${scheduleData.month}\",\"participants\":\"$participants\",\"place\":\"$place\",\"start_time\":\"${scheduleData.startTime}\",\"title\":\"$title\",\"year\":\"${scheduleData.year}\"}"
 
-                retrofitService.createScheduleAPI(inputJsonString)?.enqueue(object :
+                retrofitService.createScheduleAPI(inputJsonString, creatUrl)?.enqueue(object :
                     Callback<ResponseBody> {
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                         if(response.isSuccessful){
@@ -176,8 +225,18 @@ class LastCheckReservation : AppCompatActivity() {
         }
 
         finishBtn.setOnClickListener {
-            callCreateSchedule()
-            moveToAnotherPage()
+            if (scheduleData.detail == "") {
+                Toast.makeText(this@LastCheckReservation, "내용을 입력해주세요", Toast.LENGTH_SHORT).show()
+            } else {
+                if (actionType == "edit" && scheduleData.scheduleId != "") {
+                    editDeleteSchedule()
+                    callCreateSchedule()
+                    moveToAnotherPage()
+                } else { // 새로 생성
+                    callCreateSchedule()
+                    moveToAnotherPage()
+                }
+            }
         }
     }
 }

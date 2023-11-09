@@ -77,10 +77,8 @@ class DetailScheduleActivity : AppCompatActivity() {
         // 툴바의 홈가기 버튼 클릭 처리
         firstPageIcon.setOnClickListener {
             val intent = Intent(this@DetailScheduleActivity,CalandarMainActivity::class.java)
-//            intent.putExtra("data",detailSchedule)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
-
-            finish()
         }
 
         // 삭제 레트로핏

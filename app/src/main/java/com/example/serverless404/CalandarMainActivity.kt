@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -80,8 +81,8 @@ class CalandarMainActivity : AppCompatActivity() {
 
         val dateText : TextView = findViewById(R.id.scheduleDateTextView)
         val refreshIcon = findViewById<ImageView>(R.id.refreshImage)
-        val addScheduleButton = findViewById<Button>(R.id.addScheduleButton)
-        val addGeneralButton = findViewById<Button>(R.id.addGeneralButton)
+        val addScheduleButton = findViewById<LinearLayout>(R.id.addScheduleButton)
+        val addGeneralButton = findViewById<LinearLayout>(R.id.addGeneralButton)
 
         //달력 뷰
         calendar = findViewById(R.id.calendarView)
